@@ -1,0 +1,57 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+footer {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  text-align: right;
+}
+form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: 30px;
+}
+h4 {
+  font-size: 20px;
+}
+h6 {
+  text-align: left;
+  margin-top: 10px;
+}
+.main-card {
+  background: linear-gradient(
+    181.2deg,
+    rgb(181, 239, 249) 10.5%,
+    rgb(254, 254, 254) 86.8%
+  );
+  display: block;
+  margin: 30px auto;
+  max-width: 600px;
+}
+.maintemp {
+  font-size: 40px;
+}
+.card-title {
+  font-size: 12px;
+  font-weight: bold;
+}
+.container-md {
+  display: flex;
+}
+.col-5 {
+  display: block;
+
+  text-align: center;
+}
+.col-4 {
+  margin: auto;
+  text-align: left;
+}
+
+#celsius,
+#fahren {
+  text-decoration: none;
+}
