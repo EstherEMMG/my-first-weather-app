@@ -24,9 +24,7 @@ todayDate.innerHTML = `${day} ${date}  ${hour}:${minute}`;
 
 function displayWeatherCondition(response) {
   document.querySelector("h1").innerHTML = response.data.name;
-  document.querySelector(".maintemp").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  document.querySelector(".maintemp").innerHTML = celsiusTemperature;
   document.querySelector("#humidity").innerHTML = Math.round(
     response.data.main.humidity
   );
@@ -44,6 +42,7 @@ function displayWeatherCondition(response) {
   document
     .querySelector("#icon")
     .setAttribute("alt", response.data.weather[0].description);
+  celsiusTemperature = Math.round(response.data.main.temp);
 }
 
 function search(event) {
@@ -59,12 +58,16 @@ form.addEventListener("submit", search, displayWeatherCondition);
 function changeToCel(event) {
   event.preventDefault();
   let temp = document.querySelector(".maintemp");
-  temp.innerHTML = "7";
+  celsius.classList.add("active");
+  fahren.classList.remove("active");
+  temp.innerHTML = celsiusTemperature;
 }
 function changeToFah(event) {
   event.preventDefault();
   let temp = document.querySelector(".maintemp");
-  temp.innerHTML = "-14";
+  celsius.classList.remove("active");
+  fahren.classList.add("active");
+  temp.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
 }
 let fahren = document.querySelector("#fahren");
 fahren.addEventListener("click", changeToFah);
@@ -77,3 +80,7 @@ function currentPosition(position) {
   axios.get(apiUrl).then(displayWeatherCondition);
 }
 navigator.geolocation.getCurrentPosition(currentPosition);
+
+let celsiusTemperature = null;
+
+search("Paris");

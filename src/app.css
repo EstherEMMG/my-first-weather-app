@@ -32,7 +32,7 @@ h6 {
   max-width: 600px;
 }
 .maintemp {
-  font-size: 40px;
+  font-size: 36px;
 }
 .card-title {
   font-size: 12px;
@@ -43,15 +43,25 @@ h6 {
 }
 .col-5 {
   display: block;
-
   text-align: center;
 }
 .col-4 {
   margin: auto;
   text-align: left;
 }
+.degrees {
+  font-size: 20px;
+  margin-left: 3px;
+}
 
 #celsius,
 #fahren {
+  text-decoration: none;
+}
+.maintemp .active {
+  color: black;
+  cursor: default;
+}
+.maintemp .active:hover {
   text-decoration: none;
 }
