@@ -1,26 +1,26 @@
-let now = new Date();
-let date = now.getDate();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
-let day = days[now.getDay()];
-let hour = now.getHours();
-if (hour < 10) {
-  hour = `0${hour}`;
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  let day = days[date.getDay()];
+  let hour = date.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+  let minute = date.getMinutes();
+  if (minute < 10) {
+    minute = `0${minute}`;
+  }
+  return `${day} ${date}  ${hour}:${minute}`;
 }
-let minute = now.getMinutes();
-if (minute < 10) {
-  minute = `0${minute}`;
-}
-let todayDate = document.querySelector("#today-date");
-todayDate.innerHTML = `${day} ${date}  ${hour}:${minute}`;
 
 function displayWeatherCondition(response) {
   document.querySelector("h1").innerHTML = response.data.name;
@@ -47,13 +47,16 @@ function displayWeatherCondition(response) {
 
 function search(event) {
   event.preventDefault();
-  let input = document.querySelector("#find-city").value;
+  let input = document.querySelector("#find-city");
+  currentPosition(input.value);
+}
+
+function currentPosition(city) {
   let apiKey = "ed8f1b521e1ef205ffa5fdddc628ab7e";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeatherCondition);
 }
-let form = document.querySelector("#search-city");
-form.addEventListener("submit", search, displayWeatherCondition);
+navigator.geolocation.getCurrentPosition(currentPosition);
 
 function changeToCel(event) {
   event.preventDefault();
@@ -69,18 +72,16 @@ function changeToFah(event) {
   fahren.classList.add("active");
   temp.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
 }
-let fahren = document.querySelector("#fahren");
-fahren.addEventListener("click", changeToFah);
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", changeToCel);
-
-function currentPosition(position) {
-  let apiKey = "ed8f1b521e1ef205ffa5fdddc628ab7e";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=position.coords.latitude&lon=position.coords.longitude&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeatherCondition);
-}
-navigator.geolocation.getCurrentPosition(currentPosition);
 
 let celsiusTemperature = null;
 
-search("Paris");
+let form = document.querySelector("#search-city");
+form.addEventListener("submit", search, displayWeatherCondition);
+
+let fahren = document.querySelector("#fahren");
+fahren.addEventListener("click", changeToFah);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", changeToCel);
+
+currentPosition("Paris");
