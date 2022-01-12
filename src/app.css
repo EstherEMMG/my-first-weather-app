@@ -34,9 +34,15 @@ h6 {
 .maintemp {
   font-size: 36px;
 }
-.card-title {
-  font-size: 12px;
+.weather-forecast-day {
+  font-size: 13px;
   font-weight: bold;
+}
+.weather-forecast-temp {
+  font-size: 14px;
+}
+.min-temp {
+  opacity: 0.8;
 }
 .container-md {
   display: flex;
